@@ -1,1 +1,1 @@
-# MinesweeperMultiplayer
+# MinesweeperMultiplayerServer
