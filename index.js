@@ -1,11 +1,19 @@
-import express from "express";
-const app = express();
-const port = 2137;
+import { WebSocketServer } from 'ws';
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-})
+const wss = new WebSocketServer({ port: 2137 });
+  
+wss.on('connection', function connection(ws) {
+    ws.on('message', function message(data) {
+        const opcode = data.split(".")[0];
+        const content = data.split(".").slice(1).join(".");
+        console.log('received: %s', data);
+        switch(opcode)
+        {
+            case 0:
+                ws.send(`1.${content}`);
+                break;
+        }
+    });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-})
+    ws.send('something');
+});

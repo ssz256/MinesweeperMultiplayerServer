@@ -1,0 +1,3 @@
+OPCODES:
+0 - c - send nickname
+1 - s - return token
